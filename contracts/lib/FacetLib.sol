@@ -1,10 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
-contract MsgFacet {
+// alternative design to MsgFacet
+// FacetLib contains the same functionality as MsgFacet, except with internal function calls
+
+library FacetLib {
   // specify psuedorandom storage slot to avoid overwriting vars
   bytes32 internal constant STORAGE_LOCATION =
-    keccak256('MsgFacet.hashed.location');
+    keccak256('FacetLib.hashed.location');
 
   // storage layout
   struct Storage {
@@ -18,12 +21,12 @@ contract MsgFacet {
     }
   }
 
-  function setMessage(string calldata _message) external {
+  function setMsg(string calldata _message) internal {
     Storage storage s = getStorage();
     s.message = _message;
   }
 
-  function getMessage() external view returns (string memory m) {
+  function getMsg() internal view returns (string memory m) {
     m = getStorage().message;
   }
 }
