@@ -1,0 +1,8 @@
+.env
+typechain-types/
+artifacts/
+.prettierrc
+cache
+node_modules/
+node_modules
+/node_modules
